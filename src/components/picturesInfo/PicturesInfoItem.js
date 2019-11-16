@@ -5,6 +5,8 @@ import { IconImage } from '../../styledComponent/IconImage';
 import { Link } from 'react-router-dom';
 
 const Card = styled.div`
+  border-radius: 30px 30px 30px 30px;
+  height: 570px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   &:hover {
@@ -15,10 +17,10 @@ const Card = styled.div`
 const CardImage = styled.img.attrs({
   alt: 'raw',
 })`
-  margin: -25px 12px 61px 416px;
   min-width: 400px;
-  width: 500px;
+  width: 887px;
   height: 500px;
+  object-fit: cover;
   border-radius: 60px 60px 60px 60px;
 `;
 
@@ -35,11 +37,12 @@ const FlipCardFront = styled.div`
 `;
 
 const FlipCardBack = styled.div`
+  border-radius: 60px 60px 60px 60px;
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background-color: #2980b9;
+  background-color: black;
   color: white;
   transform: rotateY(180deg);
 `;
@@ -54,9 +57,12 @@ const FlipCardInner = styled.div`
 `;
 
 const FlipCard = styled.div`
-  margin-right: -1300px;
   border-radius: 60px 60px 60px 60px;
-  width: 500px;
+  z-index: 1;
+  position: absolute;
+  top: 78px;
+  left: 285px;
+  width: 887px;
   height: 500px;
   perspective: 1000px;
   &:hover ${FlipCardInner} {
@@ -65,13 +71,17 @@ const FlipCard = styled.div`
 `;
 
 const PicturesInfoItem = ({ currentDetails }) => {
-  const { id, description, urls } = currentDetails;
+  const { user, alt_description, urls } = currentDetails;
   return (
     <>
-      <Card>
-        <Wrapper mt='50px'>
+      <Wrapper mt='50px'>
+        <Card>
           <Link to='/pictures'>
-            <IconImage src='https://icon.now.sh/close/5fa8d3' />
+            <IconImage
+              mr='1175px'
+              w='55px'
+              src='https://icon.now.sh/close/5fa8d3'
+            />
           </Link>
           <FlipCard>
             <FlipCardInner>
@@ -80,14 +90,16 @@ const PicturesInfoItem = ({ currentDetails }) => {
               </FlipCardFront>
               <FlipCardBack>
                 <Container>
-                  <h1>your user id is {id}</h1>
-                  <p>{description}</p>
+                  <h1>Author: {user.name}</h1>
+                  <p>{user.bio}</p>
+                  <p>Picture's description: {alt_description}</p>
+                  <p>Total number of likes {user.total_photos}</p>
                 </Container>
               </FlipCardBack>
             </FlipCardInner>
           </FlipCard>
-        </Wrapper>
-      </Card>
+        </Card>
+      </Wrapper>
     </>
   );
 };

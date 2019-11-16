@@ -30,7 +30,7 @@ const Title = styled.h2`
 const App = ({ history }) => {
   const [pictures, setPictures] = useState([]);
   const [currentDetails, setCurrentDetails] = useState(null);
-  const [query, setQuery] = useState('nature');
+  const [query, setQuery] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

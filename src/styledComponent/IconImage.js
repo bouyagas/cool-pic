@@ -3,6 +3,6 @@ import styled from 'styled-components';
 export const IconImage = styled.img.attrs({
   alt: 'icon',
 })`
-  margin-right: 1300px;
-  width: 50px;
+  margin-right: ${props => (props.mr ? props.mr : '1300px')};
+  width: ${props => (props.w ? props.w : '50px')};
 `;

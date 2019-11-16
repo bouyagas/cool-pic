@@ -7,7 +7,7 @@ const Errors = styled.div`
 `;
 
 const Error = ({ isError }) => {
-  return <>{isError && <Errors>Something went wrong ...</Errors>}</>;
+  return <>{isError && <Errors>Something went wrong with your request ...</Errors>}</>;
 };
 
 export default Error;

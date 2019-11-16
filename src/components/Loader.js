@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Loading = styled.div`
   font-size: 30px;
-  color: palevioletred;
+  color: green;
 `;
 
 const Loader = ({ isLoading, query }) => {
