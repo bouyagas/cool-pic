@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled, { StyledComponent } from "styled-components";
 
-const Form = styled.form`
+const Form: StyledComponent<"form", any, {}, never> = styled.form`
   width: 50%;
   position: relative;
   height: 50px;
   overflow: hidden;
 `;
 
-const Label = styled.label`
+const Label: StyledComponent<"label", any, {}, never> = styled.label`
   position: absolute;
   bottom: 0px;
   left: 0%;
@@ -18,7 +18,7 @@ const Label = styled.label`
   border-bottom: 1px solid #5fa8d3;
 
   :after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -1px;
     left: 0px;
@@ -30,7 +30,7 @@ const Label = styled.label`
   }
 `;
 
-const Span = styled.span`
+const Span: StyledComponent<"span", any, {}, never> = styled.span`
   font-size: 22px;
   position: absolute;
   bottom: 5px;
@@ -41,9 +41,17 @@ const Span = styled.span`
     0px 18px 23px rgba(0, 0, 0, 0.2);
 `;
 
-const SearchBar = styled.input.attrs({
-  type: 'text',
-  name: 'name',
+const SearchBar: StyledComponent<
+  "input",
+  any,
+  {
+    type: "text";
+    name: "name";
+  },
+  "name" | "type"
+> = styled.input.attrs({
+  type: "text",
+  name: "name"
 })`
   font-size: 26px;
   width: 100%;
@@ -62,21 +70,34 @@ const SearchBar = styled.input.attrs({
   }
 `;
 
-const Search = ({ query, handleSubmit, handleOnChange }) => {
+type fromE = React.FormEvent<HTMLFormElement>;
+type changeE = React.ChangeEvent<HTMLInputElement>;
+
+interface Props {
+  query: string;
+  handleSubmit: (event: fromE) => void;
+  handleOnChange: (event: changeE) => void;
+}
+
+const Search: React.FC<Props> = ({
+  query,
+  handleSubmit,
+  handleOnChange
+}): React.ReactElement => {
   return (
-    <>
+    <React.Fragment>
       <Form onSubmit={handleSubmit}>
         <SearchBar
           value={query}
           onChange={handleOnChange}
           required
-          autoComplete='off'
+          autoComplete="off"
         />
         <Label>
           <Span>Enter your search term here...</Span>
         </Label>
       </Form>
-    </>
+    </React.Fragment>
   );
 };
 export default Search;

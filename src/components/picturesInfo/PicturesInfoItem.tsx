@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Wrapper } from '../../styledComponent/Wrapper';
-import { IconImage } from '../../styledComponent/IconImage';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled, { StyledComponent } from "styled-components";
+import { Wrapper } from "../../styledComponent/Wrapper";
+import { IconImage } from "../../styledComponent/IconImage";
+import { Link } from "react-router-dom";
 
-const Card = styled.div`
+const Card: StyledComponent<"div", any, {}, never> = styled.div`
   border-radius: 30px 30px 30px 30px;
   height: 570px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -14,8 +14,15 @@ const Card = styled.div`
   }
 `;
 
-const CardImage = styled.img.attrs({
-  alt: 'raw',
+const CardImage: StyledComponent<
+  "img",
+  any,
+  {
+    alt: "raw";
+  },
+  "alt"
+> = styled.img.attrs({
+  alt: "raw"
 })`
   min-width: 400px;
   width: 887px;
@@ -24,11 +31,11 @@ const CardImage = styled.img.attrs({
   border-radius: 60px 60px 60px 60px;
 `;
 
-const Container = styled.div`
+const Container: StyledComponent<"div", any, {}, never> = styled.div`
   padding: 2px 16px;
 `;
 
-const FlipCardFront = styled.div`
+const FlipCardFront: StyledComponent<"div", any, {}, never> = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -36,7 +43,7 @@ const FlipCardFront = styled.div`
   color: black;
 `;
 
-const FlipCardBack = styled.div`
+const FlipCardBack: StyledComponent<"div", any, {}, never> = styled.div`
   border-radius: 60px 60px 60px 60px;
   position: absolute;
   width: 100%;
@@ -47,7 +54,7 @@ const FlipCardBack = styled.div`
   transform: rotateY(180deg);
 `;
 
-const FlipCardInner = styled.div`
+const FlipCardInner: StyledComponent<"div", any, {}, never> = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -56,7 +63,7 @@ const FlipCardInner = styled.div`
   transform-style: preserve-3d;
 `;
 
-const FlipCard = styled.div`
+const FlipCard: StyledComponent<"div", any, {}, never> = styled.div`
   border-radius: 60px 60px 60px 60px;
   z-index: 1;
   position: absolute;
@@ -70,17 +77,22 @@ const FlipCard = styled.div`
   }
 `;
 
-const PicturesInfoItem = ({ currentDetails }) => {
+interface Props {
+  currentDetails: any;
+}
+const PicturesInfoItem: React.FC<Props> = ({
+  currentDetails
+}): React.ReactElement => {
   const { user, alt_description, urls } = currentDetails;
   return (
-    <>
-      <Wrapper mt='50px'>
+    <React.Fragment>
+      <Wrapper mt="50px" ctr="">
         <Card>
-          <Link to='/pictures'>
+          <Link to="/pictures">
             <IconImage
-              mr='1175px'
-              w='55px'
-              src='https://icon.now.sh/close/5fa8d3'
+              mr="1175px"
+              w="55px"
+              src="https://icon.now.sh/close/5fa8d3"
             />
           </Link>
           <FlipCard>
@@ -100,7 +112,7 @@ const PicturesInfoItem = ({ currentDetails }) => {
           </FlipCard>
         </Card>
       </Wrapper>
-    </>
+    </React.Fragment>
   );
 };
 
