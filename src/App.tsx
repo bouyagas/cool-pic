@@ -10,6 +10,7 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import axios, { AxiosResponse } from "axios";
 
+
 dotenv.config();
 
 const Header: StyledComponent<"header", any, {}, never> = styled.header`
@@ -36,9 +37,15 @@ interface Props {
 
 export interface Picture {
   id: number;
-  urls: string | null | any;
-  user: string | null | any;
-  alt_description: string | null | any;
+  urls: {
+    [key: string]: string
+  }
+  user: {
+    [key: string]: string
+  }
+  alt_description: {
+    [key: string]: string
+  }
   (prevState: null): null;
 }
 
@@ -50,7 +57,7 @@ interface ServerData {
 const App: React.FC<Props> = ({ history }): React.ReactElement => {
   const [pictures, setPictures] = React.useState<Picture[]>([]);
   const [query, setQuery] = React.useState<string>("Science");
-  const [currentDetails, setCurrentDetails] = React.useState<any | null>(null);
+  const [currentDetails, setCurrentDetails] = React.useState<Picture | any>({});
   const [isError, setIsError] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
@@ -107,20 +114,20 @@ const App: React.FC<Props> = ({ history }): React.ReactElement => {
             exact
             path="/"
             render={() => (
-              <>
+              <React.Fragment>
                 <Title>Find Cool Pictures</Title>
                 <Search
                   query={query}
                   handleSubmit={handleSubmit}
                   handleOnChange={handleOnChange}
                 />
-              </>
+              </React.Fragment>
             )}
           />
           <Route
             path="/pictures"
             render={() => (
-              <>
+              <React.Fragment>
                 <Pictures
                   query={query}
                   pictures={pictures}
@@ -128,15 +135,15 @@ const App: React.FC<Props> = ({ history }): React.ReactElement => {
                 />
                 <Loader query={query} isLoading={isLoading} />
                 <Error isError={isError} />
-              </>
+              </React.Fragment>
             )}
           />
-          <>
+          <React.Fragment>
             <Route
               path="/picture/:id"
               render={() => <PicturesInfo currentDetails={currentDetails} />}
             />
-          </>
+          </React.Fragment>
         </Header>
       </Wrapper>
     </React.Fragment>

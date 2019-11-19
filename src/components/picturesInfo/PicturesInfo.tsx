@@ -1,8 +1,9 @@
 import React from "react";
 import PicturesInfoItem from "./PicturesInfoItem";
+import { Picture } from "../../App";
 
 interface Props {
-  currentDetails: any;
+  currentDetails: Picture;
 }
 
 const PicturesInfo: React.FC<Props> = ({

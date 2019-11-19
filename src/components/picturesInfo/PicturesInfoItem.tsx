@@ -3,6 +3,7 @@ import styled, { StyledComponent } from "styled-components";
 import { Wrapper } from "../../styledComponent/Wrapper";
 import { IconImage } from "../../styledComponent/IconImage";
 import { Link } from "react-router-dom";
+import { Picture } from "../../App";
 
 const Card: StyledComponent<"div", any, {}, never> = styled.div`
   border-radius: 30px 30px 30px 30px;
@@ -78,7 +79,7 @@ const FlipCard: StyledComponent<"div", any, {}, never> = styled.div`
 `;
 
 interface Props {
-  currentDetails: any;
+  currentDetails: Picture;
 }
 const PicturesInfoItem: React.FC<Props> = ({
   currentDetails
@@ -86,7 +87,7 @@ const PicturesInfoItem: React.FC<Props> = ({
   const { user, alt_description, urls } = currentDetails;
   return (
     <React.Fragment>
-      <Wrapper mt="50px" ctr="">
+      <Wrapper mt="50px">
         <Card>
           <Link to="/pictures">
             <IconImage
